@@ -5,12 +5,15 @@ import { data, ReportType } from 'src/data';
 export class AppController {
   @Get()
   getAllReports(@Param('type') type: string) {
-    const reportType = type === "income" ? ReportType.INCOME : ReportType.EXPENSE
-    return data.report.filter((report)=> report.type === reportType);
+    const reportType =
+      type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
+    return data.report.filter((report) => report.type === reportType);
   }
   @Get(':id')
-  getReportById() {
-    return 'Hallo Adel';
+  getReportById(@Param('type') type: string, @Param('id') id: string) {
+    const reportType =
+      type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
+    return data.report.filter((report) => report.type === reportType).find(report => report.id === id);
   }
 
   @Post()
